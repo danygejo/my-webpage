@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Daily Blessings</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,7 +14,7 @@
             color: #333;
             text-align: center;
         }
-        .container {
+        .custom-container {
             max-width: 900px;
             margin: 20px auto;
             padding: 20px;
@@ -21,84 +22,48 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        .article {
-            border-bottom: 2px solid #ddd;
-            padding: 15px 0;
-        }
-        .article:last-child {
-            border-bottom: none;
-        }
-        .footer {
+        .custom-footer {
             text-align: center;
             padding: 20px;
             background: #2c3e50;
             color: white;
             margin-top: 20px;
         }
-        nav {
-            background: #34495e;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 16px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .logo {
-            width: 80px;
-        }
-        select {
-            padding: 5px;
-            font-size: 16px;
-            margin: 10px;
-        }
-        .highlight {
-            background-color: yellow;
-            cursor: pointer;
-        }
-        .nav-title {
-            color: white;
-            font-size: 24px;
-            flex-grow: 1;
-            text-align: center;
+        .custom-logo {
+            width: 100px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div>
-            <a href="#bible">Bible Reading</a>
-            <a href="#articles">Articles</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">The Daily Blessings</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="#prayer">Daily Prayer</a></li>
+                <li class="nav-item"><a class="nav-link" href="#bible">Bible Reading</a></li>
+                <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
+            </ul>
         </div>
-        <h1 class="nav-title">The Daily Blessings</h1>
-        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
     </nav>
-    <div class="container">
+    <div class="container custom-container">
+        <h1>The Daily Blessings</h1>
+        <img src="logo.webp" alt="The Daily Blessings Logo" class="custom-logo">
         <h2 id="prayer">Daily Prayer</h2>
         <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil."</p>
 
         <h2 id="bible">Bible Reading</h2>
         <p><strong>Psalm 23</strong></p>
         <p>The Lord is my shepherd; I shall not want.<br>
-            He makes me lie down in green pastures. He leads me beside still waters.<br>
-            He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
-            Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
-            for you are with me; your rod and your staff, they comfort me.<br>
-            You prepare a table before me in the presence of my enemies;<br>
-            you anoint my head with oil; my cup overflows.<br>
-            Surely goodness and mercy shall follow me all the days of my life,<br>
-            and I shall dwell in the house of the Lord forever.</p>
-        
+           He makes me lie down in green pastures. He leads me beside still waters.<br>
+           He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
+           Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
+           for you are with me; your rod and your staff, they comfort me.<br>
+           You prepare a table before me in the presence of my enemies;<br>
+           you anoint my head with oil; my cup overflows.<br>
+           Surely goodness and mercy shall follow me all the days of my life,<br>
+           and I shall dwell in the house of the Lord forever.</p>
+
         <h2 id="articles">Articles</h2>
         <label for="reading-level">Select Reading Level:</label>
         <select id="reading-level" onchange="fetchArticles()">
@@ -107,16 +72,17 @@
             <option value="level_hard">Advanced</option>
         </select>
         <div id="articles-container"></div>
-        
-        <div class="footer">
+
+        <div class="footer custom-footer">
             <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>
+            <p><em>Note: This content is generated using AI and may contain mistakes.</em></p>
         </div>
     </div>
 
     <script>
         async function fetchArticles() {
             try {
-                const response = await fetch("article.json"); // Fetch articles.json
+                const response = await fetch("articles.json"); // Fetch articles.json
                 const articles = await response.json();
                 displayArticles(articles);
             } catch (error) {

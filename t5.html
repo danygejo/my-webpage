@@ -55,7 +55,7 @@
             text-decoration: underline;
         }
         .logo {
-            width: 80px;
+            width: 100px;
         }
         select {
             padding: 5px;
@@ -66,12 +66,6 @@
             background-color: yellow;
             cursor: pointer;
         }
-        .nav-title {
-            color: white;
-            font-size: 24px;
-            flex-grow: 1;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -80,7 +74,7 @@
             <a href="#bible">Bible Reading</a>
             <a href="#articles">Articles</a>
         </div>
-        <h1 class="nav-title">The Daily Blessings</h1>
+        <h1 style="flex-grow: 1; text-align: center;">The Daily Blessings</h1>
         <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
     </nav>
     <div class="container">
@@ -116,7 +110,7 @@
     <script>
         async function fetchArticles() {
             try {
-                const response = await fetch("article.json"); // Fetch articles.json
+                const response = await fetch("articles.json"); // Fetch articles.json
                 const articles = await response.json();
                 displayArticles(articles);
             } catch (error) {

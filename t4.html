@@ -116,7 +116,7 @@
     <script>
         async function fetchArticles() {
             try {
-                const response = await fetch("article.json"); // Fetch articles.json
+                const response = await fetch("articles.json"); // Fetch articles.json
                 const articles = await response.json();
                 displayArticles(articles);
             } catch (error) {
