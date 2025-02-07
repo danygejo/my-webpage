@@ -16,5 +16,10 @@
         "level_easy": "<p>Faith means trusting God even when things are tough. When we face problems, having faith in God helps us stay strong. God is like a loving parent who takes care of us and helps us through difficult times. By praying and believing in God, we can find peace and hope. Remember, God is always with you, and He will never leave you alone. AI generated content and may have mistakes.</p>",
         "level_medium": "<p>Faith is a powerful tool that helps us navigate through difficult times. It gives us the strength to endure hardships and the hope to keep moving forward. The Bible is filled with stories of people who faced great challenges but overcame them through their faith in God. By holding onto our faith, we can find comfort and resilience in the midst of trials. It reminds us that we are not alone and that God has a plan for our lives. AI generated content and may have mistakes.</p>",
         "level_hard": "<p>Faith in difficult times is not merely a passive belief but an active trust in God’s sovereignty and goodness. The scriptures teach us that faith is the assurance of things hoped for, the conviction of things not seen (Hebrews 11:1). This kind of faith requires a deep, abiding trust in God’s character and promises. It involves surrendering our fears and doubts to God, believing that He is in control and that He will work all things for our good (Romans 8:28). This faith is both a gift from God and a discipline that we must cultivate through prayer, study, and obedience. AI generated content and may have mistakes.</p>"
-    }
+    },
+   {    
+    "title": "Wordless Story",
+    "description": "A story told purely through images.",
+    "image": "story.webp"
+   }
 ]
