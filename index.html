@@ -41,7 +41,9 @@
         nav {
             background: #34495e;
             padding: 10px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         nav a {
             color: white;
@@ -53,8 +55,7 @@
             text-decoration: underline;
         }
         .logo {
-            width: 100px;
-            margin-bottom: 10px;
+            width: 80px;
         }
         select {
             padding: 5px;
@@ -65,34 +66,38 @@
             background-color: yellow;
             cursor: pointer;
         }
+        .nav-title {
+            color: white;
+            font-size: 24px;
+            flex-grow: 1;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <nav>
-        <a href="#prayer">Daily Prayer</a>
-        <a href="#bible">Bible Reading</a>
-        <a href="#articles">Articles</a>
+        <div>
+            <a href="#bible">Bible Reading</a>
+            <a href="#articles">Articles</a>
+        </div>
+        <h1 class="nav-title">The Daily Blessings</h1>
+        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
     </nav>
     <div class="container">
-        <h1>The Daily Blessings</h1>
-        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
-
-        
         <h2 id="prayer">Daily Prayer</h2>
-        <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil. Amen."</p>
+        <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil."</p>
 
-        
         <h2 id="bible">Bible Reading</h2>
         <p><strong>Psalm 23</strong></p>
         <p>The Lord is my shepherd; I shall not want.<br>
-           He makes me lie down in green pastures. He leads me beside still waters.<br>
-           He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
-           Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
-           for you are with me; your rod and your staff, they comfort me.<br>
-           You prepare a table before me in the presence of my enemies;<br>
-           you anoint my head with oil; my cup overflows.<br>
-           Surely goodness and mercy shall follow me all the days of my life,<br>
-           and I shall dwell in the house of the Lord forever.</p>
+            He makes me lie down in green pastures. He leads me beside still waters.<br>
+            He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
+            Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
+            for you are with me; your rod and your staff, they comfort me.<br>
+            You prepare a table before me in the presence of my enemies;<br>
+            you anoint my head with oil; my cup overflows.<br>
+            Surely goodness and mercy shall follow me all the days of my life,<br>
+            and I shall dwell in the house of the Lord forever.</p>
         
         <h2 id="articles">Articles</h2>
         <label for="reading-level">Select Reading Level:</label>
@@ -111,7 +116,7 @@
     <script>
         async function fetchArticles() {
             try {
-                const response = await fetch("articles.json"); // Fetch articles.json
+                const response = await fetch("article.json"); // Fetch articles.json
                 const articles = await response.json();
                 displayArticles(articles);
             } catch (error) {
@@ -136,4 +141,3 @@
     </script>
 </body>
 </html>
-
