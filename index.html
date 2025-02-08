@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Daily Blessings</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap');
+        @font-face {
+            font-family: 'NYT Cheltenham';
+            src: url('path-to-your-fonts/NYTCheltenham.woff2') format('woff2'),
+                 url('path-to-your-fonts/NYTCheltenham.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
 
         body {
             font-family: 'Times New Roman', serif; /* Newspaper-like font */
             margin: 0;
             padding: 0;
-            background-color: #FFDF00; /* Golden sunrise background color */
+            background-color: white; /* White background color */
             color: #333;
             text-align: center;
         }
@@ -42,7 +48,7 @@
         }
         nav {
             background: crimson; /* Crimson color for header */
-            padding: 10px;
+            padding: 5px 10px; /* Reduced height of header */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -69,7 +75,8 @@
             cursor: pointer;
         }
         .nav-title {
-            color: white;
+            font-family: 'NYT Cheltenham', serif; /* NYT Cheltenham font */
+            color: goldenrod; /* Golden color */
             font-size: 48px; /* Double the font size */
             flex-grow: 1;
             text-align: center;
