@@ -3,12 +3,10 @@
         "title": "Psalm 23",
         "content": "The Lord is my shepherd; I shall not want.<br>He makes me lie down in green pastures. He leads me beside still waters.<br>He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>Even though I walk through the valley of the shadow of death, I will fear no evil,<br>for you are with me; your rod and your staff, they comfort me.<br>You prepare a table before me in the presence of my enemies;<br>You anoint my head with oil; my cup overflows.<br>Surely goodness and mercy shall follow me all the days of my life,<br>and I shall dwell in the house of the Lord forever."
     },
-    "articles": [
-        {
-            "title": "Todays message",
-            "level_easy": "Content for easy level.",
-            "level_medium": "Content for medium level.",
-            "level_hard": "Content for hard level."
-        }
-    ]
+    "article": {
+        "title": "Today's Reflection",
+        "level_easy": "This is the easy level content for today's reflection.",
+        "level_medium": "This is the medium level content for today's reflection.",
+        "level_hard": "This is the hard level content for today's reflection."
+    }
 }
