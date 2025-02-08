@@ -62,7 +62,7 @@
         }
         select {
             padding: 5px;
-            font-size: 16px;
+            font-size: 20px; /* Increased font size for dropdown */
             margin: 10px;
         }
         .highlight {
@@ -85,6 +85,11 @@
         .nav-right {
             justify-content: flex-end;
         }
+        .reading-level-container {
+            margin-top: 10px;
+            color: white;
+            font-size: 20px; /* Increased font size for instruction */
+        }
     </style>
 </head>
 <body>
@@ -92,13 +97,17 @@
         <div class="nav-left">
             <img src="cross.png" alt="Cross Logo" class="logo">
         </div>
-        <h1 class="nav-title">The Daily Blessings</h1>
-        <select id="reading-level" onchange="fetchArticles()">
-            <option value="level_easy">Easy</option>
-            <option value="level_medium" selected>Medium</option>
-            <option value="level_hard">Advanced</option>
-        </select>
-        <p style="color:white; font-size:16px;">Select the reading level</p>
+        <div>
+            <h1 class="nav-title">The Daily Blessings</h1>
+            <div class="reading-level-container">
+                <p>Select the reading level:</p>
+                <select id="reading-level" onchange="fetchArticles()">
+                    <option value="level_easy">Easy</option>
+                    <option value="level_medium" selected>Medium</option>
+                    <option value="level_hard">Advanced</option>
+                </select>
+            </div>
+        </div>
         <div class="nav-right">
             <a href="articles.html">Articles</a>
         </div>
