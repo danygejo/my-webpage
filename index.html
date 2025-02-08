@@ -3,18 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Daily Blessings</title>
+    <title>Articles - The Daily Blessings</title>
     <style>
-        @font-face {
-            font-family: 'NYT Cheltenham';
-            src: url('path-to-your-fonts/NYTCheltenham.woff2') format('woff2'),
-                 url('path-to-your-fonts/NYTCheltenham.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap');
 
         body {
-            font-family: 'Times New Roman', serif; /* Newspaper-like font */
+            font-family: 'Times New Roman', serif; /* Freely available newspaper-like font */
             margin: 0;
             padding: 0;
             background-color: white; /* White background color */
@@ -53,7 +47,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-direction: column; /* Stack items vertically */
         }
         nav a {
             color: white;
@@ -77,48 +70,44 @@
             cursor: pointer;
         }
         .nav-title {
-            font-family: 'NYT Cheltenham', serif; /* NYT Cheltenham font */
+            font-family: 'Times New Roman', serif; /* Freely available newspaper-like font */
             color: goldenrod; /* Golden color */
             font-size: 48px; /* Double the font size */
             text-align: center;
         }
-        .nav-right {
+        .nav-left, .nav-right {
             display: flex;
             align-items: center;
+        }
+        .nav-left {
+            justify-content: flex-start;
+        }
+        .nav-right {
+            justify-content: flex-end;
         }
     </style>
 </head>
 <body>
     <nav>
-        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
+        <div class="nav-left">
+            <img src="cross.png" alt="Cross Logo" class="logo">
+        </div>
         <h1 class="nav-title">The Daily Blessings</h1>
         <select id="reading-level" onchange="fetchArticles()">
             <option value="level_easy">Easy</option>
             <option value="level_medium" selected>Medium</option>
             <option value="level_hard">Advanced</option>
         </select>
+        <p style="color:white; font-size:16px;">Select the reading level</p>
         <div class="nav-right">
             <a href="articles.html">Articles</a>
         </div>
     </nav>
     <div class="container">
-        <h2 id="prayer">Daily Prayer</h2>
-        <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil."</p>
-        
-        <h2 id="bible">Bible Reading</h2>
-        <p><strong>Psalm 23</strong></p>
-        <p>The Lord is my shepherd; I shall not want.<br>
-            He makes me lie down in green pastures. He leads me beside still waters.<br>
-            He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
-            Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
-            for you are with me; your rod and your staff, they comfort me.<br>
-            You prepare a table before me in the presence of my enemies;<br>
-            you anoint my head with oil; my cup overflows.<br>
-            Surely goodness and mercy shall follow me all the days of my life,<br>
-            and I shall dwell in the house of the Lord forever.</p>
-        
-        <div id="articles-container"></div>
-        
+        <h2 id="articles">Articles</h2>
+        <div id="articles-container">
+            <!-- Articles will be dynamically loaded here -->
+        </div>
     </div>
     <div class="footer">
         <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>

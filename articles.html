@@ -5,16 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articles - The Daily Blessings</title>
     <style>
-        @font-face {
-            font-family: 'NYT Cheltenham';
-            src: url('path-to-your-fonts/NYTCheltenham.woff2') format('woff2'),
-                 url('path-to-your-fonts/NYTCheltenham.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap');
 
         body {
-            font-family: 'Times New Roman', serif; /* Newspaper-like font */
+            font-family: 'Times New Roman', serif; /* Freely available newspaper-like font */
             margin: 0;
             padding: 0;
             background-color: white; /* White background color */
@@ -53,7 +47,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-direction: column; /* Stack items vertically */
         }
         nav a {
             color: white;
@@ -77,26 +70,35 @@
             cursor: pointer;
         }
         .nav-title {
-            font-family: 'NYT Cheltenham', serif; /* NYT Cheltenham font */
+            font-family: 'Times New Roman', serif; /* Freely available newspaper-like font */
             color: goldenrod; /* Golden color */
             font-size: 48px; /* Double the font size */
             text-align: center;
         }
-        .nav-right {
+        .nav-left, .nav-right {
             display: flex;
             align-items: center;
+        }
+        .nav-left {
+            justify-content: flex-start;
+        }
+        .nav-right {
+            justify-content: flex-end;
         }
     </style>
 </head>
 <body>
     <nav>
-        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
+        <div class="nav-left">
+            <img src="cross.png" alt="Cross Logo" class="logo">
+        </div>
         <h1 class="nav-title">The Daily Blessings</h1>
         <select id="reading-level" onchange="fetchArticles()">
             <option value="level_easy">Easy</option>
             <option value="level_medium" selected>Medium</option>
             <option value="level_hard">Advanced</option>
         </select>
+        <p style="color:white; font-size:16px;">Select the reading level</p>
         <div class="nav-right">
             <a href="articles.html">Articles</a>
         </div>
@@ -114,7 +116,7 @@
     <script>
         async function fetchArticles() {
             try {
-                const response = await fetch("article.json"); // Fetch articles.json
+                const response = await fetch("articles.json"); // Fetch articles.json
                 const articles = await response.json();
                 displayArticles(articles);
             } catch (error) {
