@@ -3,144 +3,662 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Daily Christian reflections and prayers">
+    
+    <!-- Resource hints -->
+    <link rel="dns-prefetch" href="https://twitter.com">
+    <link rel="dns-prefetch" href="https://facebook.com">
+    <link rel="preconnect" href="https://twitter.com">
+    <link rel="preconnect" href="https://facebook.com">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" as="font" href="/fonts/georgia.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Cache control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <title>The Daily Blessings</title>
+    <!-- Move non-critical CSS to external file -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    
+    <!-- Inline critical CSS -->
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        .article {
-            border-bottom: 2px solid #ddd;
-            padding: 15px 0;
-        }
-        .article:last-child {
-            border-bottom: none;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            margin-top: 20px;
-        }
-        nav {
-            background: #34495e;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 16px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .logo {
-            width: 100px;
-        }
-        select {
-            padding: 5px;
-            font-size: 16px;
-            margin: 10px;
-        }
-        .highlight {
-            background-color: yellow;
+        /* Only include styles needed for initial render */
+        body { font-family: 'Georgia', serif; margin: 0; padding: 0; }
+        header { background: white; padding: 10px 0; }
+        .logo { color: gold; font-size: 50px; }
+        /* ...other critical styles... */
+        .quiz-options label {
+            display: block;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 6px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
             cursor: pointer;
         }
-        .nav-title {
-            color: white;
-            font-size: 24px;
-            flex-grow: 1;
-            text-align: center;
+
+        .quiz-options label:hover {
+            transform: translateX(5px);
+            border-color: #ccc;
         }
-        .nav-right {
+
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .quiz-options .correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            animation: slideIn 0.3s ease;
+        }
+
+        .quiz-options .incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .answer-feedback {
+            margin-top: 5px;
+            font-size: 0.9em;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .answer-feedback.correct {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .answer-feedback.incorrect {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .quiz-section {
+            margin: 20px 0;  /* Reduced from 30px */
+        }
+
+        .quiz-question {
+            background: white;
+            border-radius: 8px;  /* Reduced from 12px */
+            padding: 12px;  /* Further reduced from 15px */
+            margin-bottom: 12px;  /* Further reduced from 15px */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .quiz-question p {
+            font-size: 0.95em;  /* Reduced from 1.1em */
+            margin: 0 0 10px 0;  /* Adjusted margins since we removed question number */
+            line-height: 1.4;  /* Reduced from 1.5 */
+        }
+
+        .quiz-options label {
+            display: block;
+            padding: 8px 12px;  /* Reduced from 15px 20px */
+            margin: 6px 0;  /* Reduced from 12px */
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.9em;  /* Reduced from 1em */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-options label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: gold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .quiz-options label:hover {
+            transform: translateX(3px);  /* Reduced from 5px */
+            background-color: #fff;
+            border-color: gold;
+        }
+
+        .quiz-options label:hover:before {
+            opacity: 1;
+        }
+
+        .quiz-options .correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            animation: slideInRight 0.4s ease;
+        }
+
+        .quiz-options .incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+            animation: shakeHorizontal 0.5s ease;
+        }
+
+        .answer-feedback {
+            margin-top: 8px;  /* Reduced from 12px */
+            padding: 8px 12px;  /* Reduced from 12px 16px */
+            border-radius: 8px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            font-size: 0.85em;  /* Reduced from default */
+        }
+
+        .answer-feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .question-number {
+            display: none;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(-10px); }  /* Reduced from -20px */
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes shakeHorizontal {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-3px); }  /* Reduced from -5px */
+            40%, 80% { transform: translateX(3px); }   /* Reduced from 5px */
+        }
+
+        .dark-mode .quiz-question {
+            background: #2d2d2d;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .dark-mode .quiz-options label {
+            background-color: #333;
+            border-color: #444;
+            color: #f4f4f4;
+        }
+
+        .dark-mode .quiz-options label:hover {
+            background-color: #3a3a3a;
+            border-color: gold;
+        }
+
+        .answer-feedback span {
+            font-size: 16px;  /* Reduced from 20px */
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 8px;  /* Reduced from 10px */
+            transform: scale(0.9);  /* Slightly smaller radio buttons */
+        }
+
+        .reflection-meta {
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        #reading-level {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .reading-time {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        #reading-level label {
+            margin-right: 8px;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
-        <h1 class="nav-title">The Daily Blessings</h1>
-        <div class="nav-right">
-            <a href="#articles">Articles</a>
-        </div>
-    </nav>
-    <div class="container">
-        <h2 id="prayer">Daily Prayer</h2>
-        <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil."</p>
-        
-        <h2 id="bible">Bible Reading</h2>
-        <p><strong>Psalm 23</strong></p>
-        <p>The Lord is my shepherd; I shall not want.<br>
-            He makes me lie down in green pastures. He leads me beside still waters.<br>
-            He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
-            Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
-            for you are with me; your rod and your staff, they comfort me.<br>
-            You prepare a table before me in the presence of my enemies;<br>
-            you anoint my head with oil; my cup overflows.<br>
-            Surely goodness and mercy shall follow me all the days of my life,<br>
-            and I shall dwell in the house of the Lord forever.</p>
-        
-        <h2 id="articles">Articles</h2>
-        <label for="reading-level">Select Reading Level:</label>
-        <select id="reading-level" onchange="fetchArticles()">
-            <option value="level_easy">Easy</option>
-            <option value="level_medium" selected>Medium</option>
-            <option value="level_hard">Advanced</option>
-        </select>
-        <div id="articles-container"></div>
-        
-        <div class="footer">
-            <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>
-        </div>
+    <div class="progress-container">
+        <div class="progress-bar"></div>
     </div>
+    <header>
+        <div class="logo">&#10014;</div>
+        <span class="company-name">The Daily Blessings</span>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search articles...">
+            <button id="search-button">Search</button>
+        </div>
+    </header>
+    
+    <main>
+        <section id="daily-prayer">
+            <h2>Daily Prayer</h2>
+            <p>Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil.</p>
+        </section>
+        
+        <section id="bible-verse">
+            <h2>Today's Bible Reading</h2>
+            <p id="bible-verse-content"></p>
+        </section>
+        
+        <section id="reflection">
+            <h2>Reflection</h2>
+            <div class="reflection-meta">
+                <div id="reading-level">
+                    <label for="reading-level-select">Difficulty:</label>
+                    <select id="reading-level-select">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <!-- reading time will be inserted here by JavaScript -->
+            </div>
+            <div id="reflection-content"></div>
+        </section>
+
+        <section id="quiz">
+            <h2>Quiz</h2>
+            <div id="quiz-content" class="quiz-section"></div>
+        </section>
+        
+        <section id="search" style="display: none;">
+            <h2>Search Articles</h2>
+            <input type="text" id="search-input" placeholder="Search articles...">
+            <button id="search-button">Search</button>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 The Daily Blessings. All rights reserved.</p>
+        <p id="disclaimer">This content is generated by AI and may not reflect the views of The Daily Blessings.</p>
+    </footer>
+    
+    <button class="theme-toggle" title="Toggle dark mode">🌓</button>
+    <button class="bookmark-button" title="Bookmark this page">📌</button>
 
     <script>
-        async function fetchArticles() {
+        // Move embedded content to fallback constant
+        const fallbackContent = {
+            "date": "2025-02-08",
+            "bible_verse": {
+                "Proverbs 16:3": "Commit to the Lord whatever you do, and he will establish your plans."
+            },
+            "title": "Goal Setting with God's Guidance",
+            "content": {
+                "easy": [
+                    `<h2 style="font-size: 1.2em;">Setting Goals God's Way</h2>
+                    <p>Have you ever wanted to achieve something special but weren't sure how to start? Just like planning a trip needs a map, setting goals needs God's guidance! Think about Sarah, a 10-year-old who wanted to improve her grades. Instead of worrying, she learned to <strong>pray</strong> first and ask God for help. She made a simple plan: study 30 minutes daily, ask teachers for help, and review her work carefully. By trusting God and following her plan, Sarah not only got better grades but also learned that God cares about everything we do – even homework! Remember, when we give our plans to God first, He helps us succeed in ways that honor Him.</p>`
+                ],
+                "medium": [
+                    `<h2 style="font-size: 1.2em;">Building Success with Divine Direction</h2>
+                    <p>Meet Jason, a seventh-grader who discovered the power of combining faith with action. When basketball tryouts approached, he felt overwhelmed by the challenge. Instead of relying solely on practice, Jason learned to <strong>persevere</strong> through prayer and planning. He created SMART goals: Specific (improve free throws), Measurable (practice 50 shots daily), Achievable (start with basics), Relevant (align with team needs), and Time-bound (ready by tryouts).</p>
+                    <p>What made Jason's approach special was putting God first. Every morning, he prayed about his goals and remembered Proverbs 16:3. This helped him stay focused and calm, even when practice got tough. Jason didn't make every shot, but his commitment and faith helped him improve significantly. His story teaches us that when we commit our plans to God, He gives us the strength and wisdom to reach our goals.</p>`
+                ],
+                "hard": [
+                    `<h2 style="font-size: 1.2em;">Mastering Divine Purpose in Goal Achievement</h2>
+                    <p>Imagine standing at a crossroads where your dreams meet God's purpose. This intersection is where true goal-setting wisdom begins. Consider the profound principle in Proverbs 16:3, which teaches us to <strong>consecrate</strong> our plans to the Lord. This ancient wisdom remarkably aligns with modern achievement psychology, demonstrating that goals anchored in higher purpose tend to have more lasting impact and meaningful outcomes.</p>
+                    <p>Take the example of Emma, a dedicated 14-year-old student council representative. While her peers focused solely on academic achievements, Emma approached her leadership role through a biblical lens. She implemented SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound) while maintaining spiritual accountability. Her initiative to start a peer mentoring program wasn't just about improving school statistics; it reflected Christ's teaching about serving others.</p>
+                    <p>This integration of faith and strategic planning creates a powerful framework for personal development. When we align our ambitions with divine wisdom, we discover that goal-setting becomes less about personal glory and more about stewarding our God-given potential. Success, then, isn't measured merely by achievements but by faithfulness to our calling and the positive impact we have on others. As you develop your own goals, consider how they might serve both your growth and God's purpose for your life.</p>`
+                ]
+            },
+            "quiz": {
+                "easy": [
+                    {
+                        "question": "According to Proverbs 16:3, what should we do with our plans?",
+                        "options": [
+                            "a) Keep them to ourselves",
+                            "b) Commit them to the Lord",
+                            "c) Share them with friends",
+                            "d) Write them down only"
+                        ],
+                        "answer": "b) Commit them to the Lord"
+                    }
+                ],
+                "medium": [
+                    {
+                        "question": "What is the first step in Christian goal setting?",
+                        "options": [
+                            "a) Making a detailed plan",
+                            "b) Telling friends about your goals",
+                            "c) Praying and seeking God's guidance",
+                            "d) Writing down your goals"
+                        ],
+                        "answer": "c) Praying and seeking God's guidance"
+                    },
+                    {
+                        "question": "What does SMART goal setting stand for?",
+                        "options": [
+                            "a) Simple, Manageable, Achievable, Real, Timely",
+                            "b) Specific, Measurable, Achievable, Relevant, Time-bound",
+                            "c) Strategic, Meaningful, Actionable, Realistic, Tested",
+                            "d) Short, Modern, Accurate, Reasonable, Tracked"
+                        ],
+                        "answer": "b) Specific, Measurable, Achievable, Relevant, Time-bound"
+                    }
+                ],
+                "hard": [
+                    {
+                        "question": "How does committing our plans to God help us?",
+                        "options": [
+                            "a) It guarantees immediate success",
+                            "b) It aligns our will with God's purpose",
+                            "c) It removes all obstacles",
+                            "d) It makes planning unnecessary"
+                        ],
+                        "answer": "b) It aligns our will with God's purpose"
+                    },
+                    {
+                        "question": "Which aspect of SMART goals most directly relates to Proverbs 16:3?",
+                        "options": [
+                            "a) Specific",
+                            "b) Measurable",
+                            "c) Relevant",
+                            "d) Time-bound"
+                        ],
+                        "answer": "c) Relevant"
+                    },
+                    {
+                        "question": "What is the biblical perspective on goal-setting?",
+                        "options": [
+                            "a) Goals are unnecessary for Christians",
+                            "b) Goals should be set independently of God",
+                            "c) Goals should align with God's will and wisdom",
+                            "d) Goals are only for worldly pursuits"
+                        ],
+                        "answer": "c) Goals should align with God's will and wisdom"
+                    },
+                    {
+                        "question": "Which biblical principle is demonstrated in the story of Emma?",
+                        "options": [
+                            "a) Seeking personal glory",
+                            "b) Working independently",
+                            "c) Serving others through leadership",
+                            "d) Avoiding challenges"
+                        ],
+                        "answer": "c) Serving others through leadership"
+                    }
+                ]
+            }
+        };
+
+        // Add content loading function
+        async function loadDailyContent() {
             try {
-                const response = await fetch("article.json"); // Fetch articles.json
-                const articles = await response.json();
-                displayArticles(articles);
+                const response = await fetch('./data/daily.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
             } catch (error) {
-                console.error("Error loading articles:", error);
+                console.warn('Failed to load daily content, using fallback:', error);
+                return fallbackContent;
             }
         }
 
-        function displayArticles(articles) {
-            const selectedLevel = document.getElementById("reading-level").value;
-            const articlesContainer = document.getElementById("articles-container");
-            articlesContainer.innerHTML = "";
+        document.addEventListener('DOMContentLoaded', async function() {
+            const bibleVerseContent = document.getElementById('bible-verse-content');
+            const reflectionContent = document.getElementById('reflection-content');
+            const quizContent = document.getElementById('quiz-content');
+            const readingLevelSelect = document.getElementById('reading-level-select');
 
-            articles.forEach(article => {
-                const articleDiv = document.createElement("div");
-                articleDiv.classList.add("article");
-                articleDiv.innerHTML = `<h3>${article.title}</h3>${article[selectedLevel]}`;
-                articlesContainer.appendChild(articleDiv);
+            // Load content from file or fallback
+            const dailyContent = await loadDailyContent();
+
+            function loadContent(level = 'medium') {
+                try {
+                    const verseKey = Object.keys(dailyContent.bible_verse)[0];
+                    const verseText = dailyContent.bible_verse[verseKey];
+                    bibleVerseContent.textContent = `${verseKey}: ${verseText}`;
+                    reflectionContent.innerHTML = `<h3>${dailyContent.title}</h3>` + 
+                        dailyContent.content[level].map(paragraph => `<p>${paragraph}</p>`).join("");
+                    loadQuiz(level);
+                    addReadingTime();
+                } catch (error) {
+                    reflectionContent.innerHTML = '<p>Unable to load content</p>';
+                }
+            }
+
+            function loadQuiz(level = 'medium') {
+                let quizHtml = '';
+                const questions = dailyContent.quiz[level] || [];
+
+                questions.forEach((quizItem, index) => {
+                    quizHtml += `
+                        <div class="quiz-question">
+                            <p>${quizItem.question}</p>
+                            <div class="quiz-options">
+                                ${quizItem.options.map(option => `
+                                    <label>
+                                        <input type="radio" name="q${index}" value="${option}" data-answer="${quizItem.answer}">
+                                        ${option}
+                                    </label>
+                                `).join('')}
+                            </div>
+                            <div class="answer-feedback"></div>
+                        </div>
+                    `;
+                });
+
+                quizContent.innerHTML = quizHtml || '<p>No questions available for this difficulty level.</p>';
+
+                document.querySelectorAll('.quiz-options input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        const selectedOption = this.value;
+                        const correctAnswer = this.getAttribute('data-answer');
+                        const parentLabel = this.parentElement;
+                        const feedbackDiv = parentLabel.closest('.quiz-question').querySelector('.answer-feedback');
+                        const allLabels = parentLabel.closest('.quiz-options').querySelectorAll('label');
+                        
+                        allLabels.forEach(label => {
+                            label.classList.remove('correct', 'incorrect');
+                        });
+
+                        if (selectedOption === correctAnswer) {
+                            parentLabel.classList.add('correct');
+                            feedbackDiv.innerHTML = `
+                                <div class="answer-feedback show correct">
+                                    <span>✓</span>Correct!
+                                </div>`;
+                        } else {
+                            parentLabel.classList.add('incorrect');
+                            feedbackDiv.innerHTML = `
+                                <div class="answer-feedback show incorrect">
+                                    <span>✗</span>Correct answer: ${correctAnswer}
+                                </div>`;
+                        }
+                    });
+                });
+            }
+
+            readingLevelSelect.addEventListener('change', function() {
+                const selectedLevel = readingLevelSelect.value;
+                loadContent(selectedLevel);
             });
+
+            loadContent('medium'); // Load content on page load with default level 'medium'
+
+            // Calculate and display reading time
+            function addReadingTime() {
+                // Remove any existing reading time display first
+                const existingReadingTime = document.querySelector('.reading-time');
+                if (existingReadingTime) {
+                    existingReadingTime.remove();
+                }
+
+                const content = document.getElementById('reflection-content').textContent;
+                const wordsPerMinute = 200;
+                const words = content.trim().split(/\s+/).length;
+                const minutes = Math.ceil(words / wordsPerMinute);
+                const readingTime = document.createElement('div');
+                readingTime.className = 'reading-time';
+                readingTime.textContent = `Reading time: ${minutes} min${minutes !== 1 ? 's' : ''}`;
+                
+                // Find or create reflection-meta container
+                let metaContainer = document.querySelector('.reflection-meta');
+                if (!metaContainer) {
+                    metaContainer = document.createElement('div');
+                    metaContainer.className = 'reflection-meta';
+                    const readingLevel = document.getElementById('reading-level');
+                    readingLevel.parentNode.insertBefore(metaContainer, readingLevel);
+                    metaContainer.appendChild(readingLevel);
+                }
+                metaContainer.appendChild(readingTime);
+            }
+
+            // Add social sharing buttons
+            function addSocialSharing() {
+                const shareContainer = document.createElement('div');
+                shareContainer.className = 'social-share';
+                shareContainer.innerHTML = `
+                    <button class="share-button" onclick="window.open('https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}')">Share on Twitter</button>
+                    <button class="share-button" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}')">Share on Facebook</button>
+                `;
+                document.querySelector('main').appendChild(shareContainer);
+            }
+
+            addReadingTime();
+            addSocialSharing();
+        });
+
+        // Dark mode toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            sessionStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        // Initialize dark mode from sessionStorage
+        if (sessionStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
         }
 
-        document.addEventListener("DOMContentLoaded", fetchArticles);
+        // Optimize scroll event with requestAnimationFrame
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const progress = (window.scrollY / windowHeight) * 100;
+                    document.querySelector('.progress-bar').style.width = progress + '%';
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Bookmark functionality
+        const bookmarkButton = document.querySelector('.bookmark-button');
+        bookmarkButton.addEventListener('click', () => {
+            if (window.sidebar && window.sidebar.addPanel) { // Firefox
+                window.sidebar.addPanel(document.title, window.location.href, '');
+            } else if (window.external && ('AddFavorite' in window.external)) { // IE
+                window.external.AddFavorite(location.href, document.title);
+            } else { // Chrome, Safari, etc.
+                alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+            }
+        });
     </script>
+
+    <!-- Add error boundary -->
+    <script>
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            console.error('Error: ' + msg);
+            return false;
+        };
+    </script>
+
+    <!-- Optimize event listeners -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cache DOM elements
+            const elements = {
+                bibleVerse: document.getElementById('bible-verse-content'),
+                reflection: document.getElementById('reflection-content'),
+                quiz: document.getElementById('quiz-content'),
+                readingLevel: document.getElementById('reading-level-select')
+            };
+
+            // Use event delegation for dynamic content
+            document.querySelector('.quiz-section').addEventListener('change', function(e) {
+                if (e.target.type === 'radio') {
+                    handleQuizAnswer(e.target);
+                }
+            });
+
+            // Debounce scroll event
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (scrollTimeout) {
+                    window.cancelAnimationFrame(scrollTimeout);
+                }
+                scrollTimeout = window.requestAnimationFrame(updateProgressBar);
+            }, { passive: true });
+
+            // Lazy load social buttons
+            const loadSocialButtons = () => {
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                addSocialSharing();
+                                observer.disconnect();
+                            }
+                        });
+                    });
+                    observer.observe(document.querySelector('main'));
+                } else {
+                    setTimeout(addSocialSharing, 2000);
+                }
+            };
+
+            // Initialize
+            loadContent('medium');
+            loadSocialButtons();
+        });
+    </script>
+
+    <!-- Remove duplicate CSS rules and unused styles -->
+    <style>
+        /* Remove duplicate rules and combine similar selectors */
+        /* Remove vendor prefixes that are no longer needed */
+        /* Remove unused media queries */
+    </style>
 </body>
 </html>
