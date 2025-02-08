@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'NYT Cheltenham';
+    src: url('fonts/NYTCheltenham.woff2') format('woff2'),
+         url('fonts/NYTCheltenham.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'NYT Cheltenham', serif;
+}

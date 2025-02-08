@@ -14,6 +14,7 @@
             background-color: white; /* White background color */
             color: #333;
             text-align: center;
+            font-size: 32px; /* Double the font size */
         }
         .container {
             max-width: 900px;
@@ -87,7 +88,7 @@
         }
         .reading-level-container {
             margin-top: 10px;
-            color: white;
+            color: black;
             font-size: 20px; /* Increased font size for instruction */
         }
     </style>
@@ -95,18 +96,10 @@
 <body>
     <nav>
         <div class="nav-left">
-            <img src="logo.webp" alt="Cross Logo" class="logo">
+            <img src="cross.png" alt="Cross Logo" class="logo">
         </div>
         <div>
             <h1 class="nav-title">The Daily Blessings</h1>
-            <div class="reading-level-container">
-                <p>Select the reading level:</p>
-                <select id="reading-level" onchange="fetchArticles()">
-                    <option value="level_easy">Easy</option>
-                    <option value="level_medium" selected>Medium</option>
-                    <option value="level_hard">Advanced</option>
-                </select>
-            </div>
         </div>
         <div class="nav-right">
             <a href="articles.html">Articles</a>
@@ -128,6 +121,15 @@
             Surely goodness and mercy shall follow me all the days of my life,<br>
             and I shall dwell in the house of the Lord forever.</p>
         
+        <h2 id="articles">Articles</h2>
+        <div class="reading-level-container">
+            <p>Select the reading level:</p>
+            <select id="reading-level" onchange="fetchArticles()">
+                <option value="level_easy">Easy</option>
+                <option value="level_medium" selected>Medium</option>
+                <option value="level_hard">Advanced</option>
+            </select>
+        </div>
         <div id="articles-container"></div>
         
     </div>
