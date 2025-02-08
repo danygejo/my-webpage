@@ -5,13 +5,7 @@
     },
     "articles": [
         {
-            "title": "Article 1",
-            "level_easy": "Content for easy level.",
-            "level_medium": "Content for medium level.",
-            "level_hard": "Content for hard level."
-        },
-        {
-            "title": "Article 2",
+            "title": "Todays message",
             "level_easy": "Content for easy level.",
             "level_medium": "Content for medium level.",
             "level_hard": "Content for hard level."
