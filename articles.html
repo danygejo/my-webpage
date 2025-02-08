@@ -3,47 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articles - The Daily Blessings</title>
+    <title>All Articles - The Daily Blessings</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
         body {
-            font-family: 'Roboto', sans-serif; /* Modern, professional font */
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4; /* Light grey background for a clean look */
+            background-color: #f4f4f4;
             color: #333;
+            text-align: center;
         }
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
         h1, h2, h3 {
             color: #2c3e50;
-            font-family: 'Merriweather', serif; /* Elegant serif font for headings */
-        }
-        h1 {
-            font-size: 2.5em;
-        }
-        h2 {
-            font-size: 2em;
-            margin-top: 1.5em;
-        }
-        h3 {
-            font-size: 1.5em;
-            margin-top: 1.2em;
-        }
-        p {
-            line-height: 1.6em;
-            margin: 1em 0;
         }
         .article {
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
             padding: 15px 0;
         }
         .article:last-child {
@@ -52,148 +34,46 @@
         .footer {
             text-align: center;
             padding: 20px;
-            background: #1a1a1a; /* Professional dark color for footer */
+            background: #2c3e50;
             color: white;
             margin-top: 20px;
-        }
-        nav {
-            background: #333; /* Professional dark color for header */
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2em;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .logo {
-            width: 50px;
-        }
-        select {
-            padding: 10px;
-            font-size: 1em;
-            margin: 10px;
-        }
-        .highlight {
-            background-color: yellow;
-            cursor: pointer;
-        }
-        .nav-title {
-            font-family: 'Merriweather', serif; /* Elegant serif font */
-            color: goldenrod;
-            font-size: 2em;
-            text-align: center;
-            flex: 1 1 100%;
-            margin: 10px 0;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-        }
-        .reading-level-container {
-            margin-top: 20px;
-            color: #333;
-            font-size: 1.2em;
-        }
-        .search-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .search-container input {
-            padding: 10px;
-            font-size: 1em;
-            width: 80%;
-            max-width: 500px;
-            margin: 10px 0;
-        }
-        @media (max-width: 768px) {
-            nav a {
-                font-size: 1em;
-                margin: 5px 10px;
-            }
-            .nav-title {
-                font-size: 1.5em;
-            }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-left">
-            <img src="cross.png" alt="Cross Logo" class="logo">
-        </div>
-        <div class="nav-title">The Daily Blessings</div>
-        <div class="nav-right">
-            <a href="index.html">Home</a>
-        </div>
-    </nav>
     <div class="container">
-        <h2 id="articles">Articles</h2>
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search articles..." oninput="searchArticles()">
+        <h1>All Articles</h1>
+        <div id="articles-container"></div>
+
+        <div class="footer">
+            <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>
         </div>
-        <div class="reading-level-container">
-            <p>Select the reading level:</p>
-            <select id="reading-level" onchange="fetchArticles()">
-                <option value="level_easy">Easy</option>
-                <option value="level_medium" selected>Medium</option>
-                <option value="level_hard">Advanced</option>
-            </select>
-        </div>
-        <div id="articles-container">
-            <!-- Articles will be dynamically loaded here -->
-        </div>
-    </div>
-    <div class="footer">
-        <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>
     </div>
 
     <script>
-        async function fetchArticles() {
+        async function fetchAllArticles() {
             try {
                 const response = await fetch("articles.json"); // Fetch articles.json
                 const articles = await response.json();
-                displayArticles(articles);
+                displayAllArticles(articles);
             } catch (error) {
                 console.error("Error loading articles:", error);
             }
         }
 
-        function displayArticles(articles) {
-            const selectedLevel = document.getElementById("reading-level").value;
+        function displayAllArticles(articles) {
             const articlesContainer = document.getElementById("articles-container");
             articlesContainer.innerHTML = "";
 
-            articles.articles.forEach(article => {
+            articles.forEach(article => {
                 const articleDiv = document.createElement("div");
                 articleDiv.classList.add("article");
-                articleDiv.innerHTML = `<h3>${article.title}</h3>${article[selectedLevel]}`;
+                articleDiv.innerHTML = `<h3>${article.title}</h3><p>${article.level_easy}</p><p>${article.level_medium}</p><p>${article.level_hard}</p>`;
                 articlesContainer.appendChild(articleDiv);
             });
         }
 
-        function searchArticles() {
-            const query = document.getElementById("search-input").value.toLowerCase();
-            const articles = document.querySelectorAll('.article');
-            articles.forEach(article => {
-                const title = article.querySelector('h3').innerText.toLowerCase();
-                const content = article.innerText.toLowerCase();
-                if (title.includes(query) || content.includes(query)) {
-                    article.style.display = '';
-                } else {
-                    article.style.display = 'none';
-                }
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", fetchArticles);
+        document.addEventListener("DOMContentLoaded", fetchAllArticles);
     </script>
 </body>
 </html>

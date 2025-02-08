@@ -1,22 +1,20 @@
-{
-    "articles": [
-        {
-            "title": "Article 1",
-            "level_easy": "Content for easy level.",
-            "level_medium": "Content for medium level.",
-            "level_hard": "Content for hard level."
-        },
-        {
-            "title": "Article 2",
-            "level_easy": "Content for easy level.",
-            "level_medium": "Content for medium level.",
-            "level_hard": "Content for hard level."
-        },
-        {
-            "title": "Article 3",
-            "level_easy": "Content for easy level.",
-            "level_medium": "Content for medium level.",
-            "level_hard": "Content for hard level."
-        }
-    ]
-}
+[
+    {
+        "title": "God's Love is Forever",
+        "level_easy": "<p>God loves you no matter what! His love never stops and is always there for you. When you feel sad or lonely, remember that God is with you, loving you every moment of your life. His love is like a warm hug that never ends. You can talk to God anytime and He will listen because He cares about you deeply. His love is a beautiful gift that we should cherish every day. Even when things go wrong, God’s love stays the same. AI generated content and may have mistakes.</p>",
+        "level_medium": "<p>God's love is unconditional and everlasting. It means that no matter what we do, God will always love us. This love is not based on our actions or worthiness, but on God’s nature. His love is pure, patient, and kind, always forgiving and never failing. The Bible tells us many stories of God’s enduring love for His people, showing that His love is steadfast and true. Understanding and accepting this love can bring great comfort and strength in our lives. AI generated content and may have mistakes.</p>",
+        "level_hard": "<p>Jeremiah 31:3 declares, 'I have loved you with an immutable love.' This profound statement reflects the depth and constancy of God’s love. Unlike human love, which can waver and change, God’s love remains unwavering and eternal. It is a covenantal love, rooted in His promises and faithfulness. Theologians have long pondered the nature of God’s love, recognizing it as a central theme in Christian theology. This love is not only a source of comfort but also a call to live in a way that reflects God’s love to others. AI generated content and may have mistakes.</p>"
+    },
+    {
+        "title": "Importance of Goal Setting for Christians",
+        "level_easy": "<p>Setting goals helps us grow. In the Bible, Paul says that we should aim to be like Jesus. By setting goals, we can work towards being better people and living a good life. Goals give us something to look forward to and help us stay focused on what is important. Whether it's being kinder, praying more, or helping others, having goals can make our lives better and more meaningful. AI generated content and may have mistakes.</p>",
+        "level_medium": "<p>Goal setting is vital for a Christian’s spiritual journey. It helps us align our lives with God’s will and purpose. By setting specific, measurable goals, we can track our progress and stay motivated. This practice encourages discipline, perseverance, and faithfulness. Goals can range from personal spiritual growth, such as prayer and Bible study, to acts of service and community involvement. Ultimately, setting and achieving goals helps us grow closer to God and live out our faith in tangible ways. AI generated content and may have mistakes.</p>",
+        "level_hard": "<p>Christian goal setting is a disciplined approach rooted in scripture. It involves prayerful consideration and alignment with God’s will. The process includes setting SMART goals (Specific, Measurable, Achievable, Relevant, Time-bound) that reflect our spiritual aspirations and commitments. This method not only provides clarity and direction but also fosters accountability and growth. By regularly reviewing and adjusting our goals, we can ensure that we remain focused on our spiritual journey and continue to grow in our faith. AI generated content and may have mistakes.</p>"
+    },
+    {
+        "title": "The Power of Faith in Difficult Times",
+        "level_easy": "<p>Faith means trusting God even when things are tough. When we face problems, having faith in God helps us stay strong. God is like a loving parent who takes care of us and helps us through difficult times. By praying and believing in God, we can find peace and hope. Remember, God is always with you, and He will never leave you alone. AI generated content and may have mistakes.</p>",
+        "level_medium": "<p>Faith is a powerful tool that helps us navigate through difficult times. It gives us the strength to endure hardships and the hope to keep moving forward. The Bible is filled with stories of people who faced great challenges but overcame them through their faith in God. By holding onto our faith, we can find comfort and resilience in the midst of trials. It reminds us that we are not alone and that God has a plan for our lives. AI generated content and may have mistakes.</p>",
+        "level_hard": "<p>Faith in difficult times is not merely a passive belief but an active trust in God’s sovereignty and goodness. The scriptures teach us that faith is the assurance of things hoped for, the conviction of things not seen (Hebrews 11:1). This kind of faith requires a deep, abiding trust in God’s character and promises. It involves surrendering our fears and doubts to God, believing that He is in control and that He will work all things for our good (Romans 8:28). This faith is both a gift from God and a discipline that we must cultivate through prayer, study, and obedience. AI generated content and may have mistakes.</p>"
+    }
+]

@@ -5,88 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Daily Blessings</title>
     <style>
-        /* CSS styles omitted for brevity */
-        
-        .tooltip {
-            position: relative;
-            cursor: pointer;
-            color: blue;
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .article {
+            border-bottom: 2px solid #ddd;
+            padding: 15px 0;
+        }
+        .article:last-child {
+            border-bottom: none;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 20px;
+        }
+        nav {
+            background: #34495e;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        nav a:hover {
             text-decoration: underline;
         }
-        
-        .tooltip::after {
-            content: attr(data-meaning);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: #fff;
-            padding: 5px;
-            border-radius: 5px;
-            white-space: nowrap;
-            display: none;
-            z-index: 1;
+        .logo {
+            width: 100px;
         }
-        
-        .tooltip:hover::after {
-            display: block;
+        select {
+            padding: 5px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .highlight {
+            background-color: yellow;
+            cursor: pointer;
+        }
+        .nav-title {
+            color: white;
+            font-size: 24px;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
 <body>
     <nav>
-        <!-- Navigation elements omitted for brevity -->
+        <img src="logo.webp" alt="The Daily Blessings Logo" class="logo">
+        <h1 class="nav-title">The Daily Blessings</h1>
+        <div class="nav-right">
+            <a href="#articles">Articles</a>
+        </div>
     </nav>
     <div class="container">
         <h2 id="prayer">Daily Prayer</h2>
-        <p>...</p>
+        <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil."</p>
         
         <h2 id="bible">Bible Reading</h2>
-        <div id="bible-container"></div>
+        <p><strong>Psalm 23</strong></p>
+        <p>The Lord is my shepherd; I shall not want.<br>
+            He makes me lie down in green pastures. He leads me beside still waters.<br>
+            He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
+            Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
+            for you are with me; your rod and your staff, they comfort me.<br>
+            You prepare a table before me in the presence of my enemies;<br>
+            you anoint my head with oil; my cup overflows.<br>
+            Surely goodness and mercy shall follow me all the days of my life,<br>
+            and I shall dwell in the house of the Lord forever.</p>
         
         <h2 id="articles">Articles</h2>
-        <div class="reading-level-container">
-            <p>Select the reading level:</p>
-            <select id="reading-level" onchange="fetchArticles()">
-                <option value="level_easy">Easy</option>
-                <option value="level_medium" selected>Medium</option>
-                <option value="level_hard">Advanced</option>
-            </select>
-        </div>
+        <label for="reading-level">Select Reading Level:</label>
+        <select id="reading-level" onchange="fetchArticles()">
+            <option value="level_easy">Easy</option>
+            <option value="level_medium" selected>Medium</option>
+            <option value="level_hard">Advanced</option>
+        </select>
         <div id="articles-container"></div>
         
+        <div class="footer">
+            <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>
+        </div>
     </div>
-    <div class="footer">
-        <p>&copy; 2025 The Daily Blessings | All Rights Reserved</p>
-    </div>
-    
+
     <script>
         async function fetchArticles() {
             try {
-                const response = await fetch("article.json"); // Fetch article.json
+                const response = await fetch("article.json"); // Fetch articles.json
                 const articles = await response.json();
-                displayBibleReading(articles.bible);
-                displayArticle(articles.article);
+                displayArticles(articles);
             } catch (error) {
                 console.error("Error loading articles:", error);
             }
         }
 
-        function displayBibleReading(bibleReading) {
-            const bibleContainer = document.getElementById("bible-container");
-            bibleContainer.innerHTML = `<p><strong>${bibleReading.title}</strong></p><p>${bibleReading.content}</p>`;
-        }
-
-        function displayArticle(article) {
+        function displayArticles(articles) {
             const selectedLevel = document.getElementById("reading-level").value;
             const articlesContainer = document.getElementById("articles-container");
             articlesContainer.innerHTML = "";
 
-            const articleDiv = document.createElement("div");
-            articleDiv.classList.add("article");
-            articleDiv.innerHTML = `<h3>${article.title}</h3>${article[selectedLevel]}`;
-            articlesContainer.appendChild(articleDiv);
+            articles.forEach(article => {
+                const articleDiv = document.createElement("div");
+                articleDiv.classList.add("article");
+                articleDiv.innerHTML = `<h3>${article.title}</h3>${article[selectedLevel]}`;
+                articlesContainer.appendChild(articleDiv);
+            });
         }
 
         document.addEventListener("DOMContentLoaded", fetchArticles);
