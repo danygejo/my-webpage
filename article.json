@@ -1,8 +1,20 @@
-[
-    {
-        "title": "God's Love is Forever",
-        "level_easy": "<p>God loves you no matter what! His love never stops and is always there for you. When you feel sad or lonely, remember that God is with you, loving you every moment of your life. His love is like a warm hug that never ends. You can talk to God anytime and He will listen because He cares about you deeply. His love is a beautiful gift that we should cherish every day. Even when things go wrong, God’s love stays the same. AI generated content and may have mistakes.</p>",
-        "level_medium": "<p>God's love is unconditional and everlasting. It means that no matter what we do, God will always love us. This love is not based on our actions or worthiness, but on God’s nature. His love is pure, patient, and kind, always forgiving and never failing. The Bible tells us many stories of God’s enduring love for His people, showing that His love is steadfast and true. Understanding and accepting this love can bring great comfort and strength in our lives. AI generated content and may have mistakes.</p>",
-        "level_hard": "<p>Jeremiah 31:3 declares, 'I have loved you with an immutable love.' This profound statement reflects the depth and constancy of God’s love. Unlike human love, which can waver and change, God’s love remains unwavering and eternal. It is a covenantal love, rooted in His promises and faithfulness. Theologians have long pondered the nature of God’s love, recognizing it as a central theme in Christian theology. This love is not only a source of comfort but also a call to live in a way that reflects God’s love to others. AI generated content and may have mistakes.</p>"
-    }
-]
+{
+    "bible": {
+        "title": "Psalm 23",
+        "content": "The Lord is my shepherd; I shall not want.<br>He makes me lie down in green pastures. He leads me beside still waters.<br>He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>Even though I walk through the valley of the shadow of death, I will fear no evil,<br>for you are with me; your rod and your staff, they comfort me.<br>You prepare a table before me in the presence of my enemies;<br>You anoint my head with oil; my cup overflows.<br>Surely goodness and mercy shall follow me all the days of my life,<br>and I shall dwell in the house of the Lord forever."
+    },
+    "articles": [
+        {
+            "title": "Article 1",
+            "level_easy": "Content for easy level.",
+            "level_medium": "Content for medium level.",
+            "level_hard": "Content for hard level."
+        },
+        {
+            "title": "Article 2",
+            "level_easy": "Content for easy level.",
+            "level_medium": "Content for medium level.",
+            "level_hard": "Content for hard level."
+        }
+    ]
+}

@@ -128,10 +128,17 @@
             try {
                 const response = await fetch("article.json"); // Fetch articles.json
                 const articles = await response.json();
+                displayBibleReading(articles.bible);
                 displayArticles(articles);
             } catch (error) {
                 console.error("Error loading articles:", error);
             }
+        }
+
+        function displayBibleReading(bibleReading) {
+            const bibleContainer = document.createElement("div");
+            bibleContainer.innerHTML = `<p><strong>${bibleReading.title}</strong></p><p>${bibleReading.content}</p>`;
+            document.body.insertBefore(bibleContainer, document.getElementById("articles"));
         }
 
         function displayArticles(articles) {
@@ -139,7 +146,7 @@
             const articlesContainer = document.getElementById("articles-container");
             articlesContainer.innerHTML = "";
 
-            articles.forEach(article => {
+            articles.articles.forEach(article => {
                 const articleDiv = document.createElement("div");
                 articleDiv.classList.add("article");
                 articleDiv.innerHTML = `<h3>${article.title}</h3>${article[selectedLevel]}`;

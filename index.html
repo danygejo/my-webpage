@@ -110,16 +110,7 @@
         <p>"Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil."</p>
         
         <h2 id="bible">Bible Reading</h2>
-        <p><strong>Psalm 23</strong></p>
-        <p>The Lord is my shepherd; I shall not want.<br>
-            He makes me lie down in green pastures. He leads me beside still waters.<br>
-            He restores my soul. He leads me in paths of righteousness for his name’s sake.<br>
-            Even though I walk through the valley of the shadow of death, I will fear no evil,<br>
-            for you are with me; your rod and your staff, they comfort me.<br>
-            You prepare a table before me in the presence of my enemies;<br>
-            you anoint my head with oil; my cup overflows.<br>
-            Surely goodness and mercy shall follow me all the days of my life,<br>
-            and I shall dwell in the house of the Lord forever.</p>
+        <div id="bible-container"></div>
         
         <h2 id="articles">Articles</h2>
         <div class="reading-level-container">
@@ -142,10 +133,16 @@
             try {
                 const response = await fetch("article.json"); // Fetch articles.json
                 const articles = await response.json();
+                displayBibleReading(articles.bible);
                 displayArticles(articles);
             } catch (error) {
                 console.error("Error loading articles:", error);
             }
+        }
+
+        function displayBibleReading(bibleReading) {
+            const bibleContainer = document.getElementById("bible-container");
+            bibleContainer.innerHTML = `<p><strong>${bibleReading.title}</strong></p><p>${bibleReading.content}</p>`;
         }
 
         function displayArticles(articles) {
@@ -153,7 +150,7 @@
             const articlesContainer = document.getElementById("articles-container");
             articlesContainer.innerHTML = "";
 
-            articles.forEach(article => {
+            articles.articles.forEach(article => {
                 const articleDiv = document.createElement("div");
                 articleDiv.classList.add("article");
                 articleDiv.innerHTML = `<h3>${article.title}</h3>${article[selectedLevel]}`;
