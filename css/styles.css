@@ -7,14 +7,79 @@ body {
 }
 
 header {
-    background: #35424a;
-    color: #ffffff;
+    background: white;
     padding: 20px 0;
-    text-align: center;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0px 5px 10px rgba(51, 51, 51, 0.4);
+    position: relative;
+    border: 2px solid #ddd; /* Ensure the border color is visible */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 header h1 {
     margin: 0;
+}
+
+.logo {
+    color: crimson;
+    font-size: 30px;
+    margin-left: 20px;
+    border: 2px solid gold;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: white;
+}
+
+.company-name {
+    color: crimson;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.company-name span {
+    font-size: 1.2em;
+    letter-spacing: 0.05em;
+}
+
+.header-link {
+    color: crimson;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.header-link:hover {
+    color: darkred;
+}
+
+.progress-container {
+    position: fixed;
+    width: 100%;
+    height: 5px;
+    top: 0;
+    left: 0;
+    background: #f3f3f3;
+}
+
+.progress-bar {
+    height: 5px;
+    background: crimson;
+    width: 0;
 }
 
 nav {
@@ -90,6 +155,202 @@ nav a:hover {
     background: #e8491d;
 }
 
+main {
+    padding: 20px;
+    max-width: 800px; /* Set a maximum width for the main content */
+    margin: 0 auto; /* Center the main content */
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 20px; /* Ensure consistent padding for sections */
+    background: #ffffff; /* Set a background color for sections */
+    border-radius: 8px; /* Add border radius for consistency */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    max-width: 100%; /* Ensure sections take full width within the main content */
+    margin: 0 auto 20px; /* Center the sections and add bottom margin */
+}
+
+p {
+    font-weight: 400;
+    font-size: 1.1em;
+    line-height: 1.6;
+    word-spacing: 0.03em;
+    letter-spacing: 0.005em;
+    margin-bottom: 1.2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5em;
+    word-spacing: 0.03em;
+    letter-spacing: 0.005em;
+    text-align: center;
+}
+
+.reflection-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9em;
+}
+
+.reflection-meta > * {
+    white-space: nowrap;
+}
+
+.quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.quiz-options label {
+    flex: 1 1 calc(50% - 5px);
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    margin: 4px 0;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.quiz-options label:hover {
+    transform: translateX(3px);
+    border-color: #ccc;
+}
+
+.quiz-options input[type="radio"] {
+    margin-right: 8px;
+}
+
+.quiz-options .correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    animation: slideIn 0.3s ease;
+}
+
+.quiz-options .incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    animation: shake 0.5s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.answer-feedback {
+    margin-top: 5px;
+    font-size: 0.9em;
+    padding: 8px;
+    border-radius: 4px;
+    display: none;
+}
+
+.answer-feedback.correct {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.answer-feedback.incorrect {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+#reflection-content, #daily-prayer, #bible-verse {
+    max-width: 100%; /* Ensure these sections take full width within the main content */
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.articles-library {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.articles-library a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: crimson;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.articles-library a:hover {
+    background-color: darkred;
+}
+
+.articles-library img {
+    width: 24px;
+    height: 24px;
+}
+
+footer {
+    padding: 10px 0;
+    font-size: 0.8em;
+    color: #aaa;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0px 5px 10px rgba(51, 51, 51, 0.4);
+    border: 2px solid #ddd; /* Ensure the border color is visible */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer button {
+    margin-top: 10px;
+    background-color: crimson;
+    color: white;
+    margin-left: 10px;
+}
+
+#reflection, #reflection-content, #daily-prayer, #quiz {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.prayer-content p {
+    font-weight: 400;
+    font-size: 1.1em;
+    line-height: 1.6;
+    word-spacing: 0.03em;
+    letter-spacing: 0.005em;
+    margin-bottom: 1.2em;
+}
+
+.prayer-content {
+    background-color: #fcfcf7;
+}
+
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -104,4 +365,44 @@ nav a:hover {
         padding: 10px;
         text-align: center;
     }
+
+    header {
+        padding: 10px 0;
+    }
+    .logo {
+        font-size: 24px;
+        margin-left: 10px;
+    }
+    .header-link {
+        padding: 5px;
+    }
+    main {
+        padding: 10px;
+        max-width: 100%; /* Ensure the main content takes full width on smaller screens */
+    }
+    .company-name {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-name {
+        font-size: 1.2em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .logo {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    nav {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+.reflection,
+.difficulty,
+.building-success {
+    background: #ffe4b5; /* light orange */
 }

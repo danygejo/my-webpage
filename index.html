@@ -13,9 +13,9 @@
     <link rel="preconnect" href="https://facebook.com">
     
     <!-- Preload critical assets -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" as="font" href="/fonts/Roboto-Regular.ttf" type="font/ttf" crossorigin>
-    <link rel="preload" as="font" href="/fonts/Roboto-Bold.ttf" type="font/ttf" crossorigin>
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" as="font" href="fonts/Roboto-Regular.ttf" type="font/ttf" crossorigin>
+    <link rel="preload" as="font" href="fonts/Roboto-Bold.ttf" type="font/ttf" crossorigin>
     
     <!-- Cache control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -24,7 +24,7 @@
     
     <title>The Daily Blessings</title>
     <!-- Move non-critical CSS to external file -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
     
     <!-- Inline critical CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -43,36 +43,55 @@
         }
         /* Only include styles needed for initial render */
         body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; }
-        header { background: white; padding: 10px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: crimson; font-size: 50px; } /* Changed color to crimson */
-        .company-name { color: crimson; } /* Changed color to crimson */
-        .search-container { display: flex; align-items: center; } /* Show search container */
+        header { background: white; padding: 20px 0; font-weight: 700; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; box-shadow: 0px 5px 10px rgba(51, 51, 51, 0.4); position: relative; }
+        .logo { color: crimson; font-size: 30px; margin-left: 20px; border: 2px solid gold; border-radius: 50%; padding: 5px; background-color: white; }
+        .company-name { color: crimson; display: flex; align-items: center; font-family: 'Roboto', sans-serif; position: absolute; left: 50%; transform: translateX(-50%); }
+        nav { margin-left: auto; display: flex; align-items: center; }
+        .header-link { color: crimson; text-decoration: none; font-weight: bold; transition: color 0.3s ease; background-color: white; padding: 5px 10px; border-radius: 5px; }
+        .header-link:hover { color: darkred; }
+        .progress-container { position: fixed; width: 100%; height: 5px; top: 0; left: 0; background: #f3f3f3; }
+        .progress-bar { height: 5px; background: crimson; width: 0; }
+        main {
+            padding: 20px;
+            max-width: 1200px; /* Set a maximum width for the main content */
+            margin: 0 auto; /* Center the main content */
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px; /* Ensure consistent padding for sections */
+            background: #ffffff; /* Set a background color for sections */
+            border-radius: 8px; /* Add border radius for consistency */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+            max-width: 700px; /* Set a consistent maximum width for sections */
+            margin: 0 auto 20px; /* Center the sections and add bottom margin */
+        }
         p { font-weight: 400; font-size: 1.1em; line-height: 1.6; word-spacing: 0.03em; letter-spacing: 0.005em; margin-bottom: 1.2em; }
+        h1, h2, h3, h4, h5, h6 { font-size: 1.5em; word-spacing: 0.03em; letter-spacing: 0.005em; text-align: center; }
         .theme-toggle { margin-left: auto; }
         .quiz-options {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px; /* Reduced gap */
+            gap: 5px;
         }
         .quiz-options label {
-            flex: 1 1 calc(50% - 5px); /* Adjusted for reduced gap */
+            flex: 1 1 calc(50% - 5px);
             display: flex;
             align-items: center;
-            padding: 8px 10px; /* Reduced padding */
-            margin: 4px 0; /* Reduced margin */
+            padding: 8px 10px;
+            margin: 4px 0;
             border-radius: 6px;
             background-color: #fff;
             border: 1px solid #ddd;
             transition: all 0.3s ease;
             cursor: pointer;
-            font-size: 0.9em; /* Reduced font size */
+            font-size: 0.9em;
         }
         .quiz-options label:hover {
-            transform: translateX(3px); /* Reduced transform distance */
+            transform: translateX(3px);
             border-color: #ccc;
         }
         .quiz-options input[type="radio"] {
-            margin-right: 8px; /* Reduced margin */
+            margin-right: 8px;
         }
         .quiz-options .correct {
             background-color: #d4edda;
@@ -112,27 +131,27 @@
             background-color: #f8d7da;
             color: #721c24;
         }
-        /* Apply a newspaper-style layout for content sections */
         #reflection-content, #daily-prayer, #bible-verse {
-            max-width: 700px;         /* Limit line length */
-            margin: 0 auto;           /* Center content */
-            text-align: justify;      /* Justify text for uniform edges */
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+        #bible-verse {
+            background-color: #fafdfb;
         }
         h1, h2, h3, h4, h5, h6 {
-            text-align: center; /* New rule to center headings */
+            text-align: center;
         }
-        /* Updated CSS to center Difficulty and Reading Time on the same line */
         .reflection-meta {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 15px;
-            font-size: 0.9em; /* Adjust font size as needed */
+            font-size: 0.9em;
         }
         .reflection-meta > * {
             white-space: nowrap;
         }
-        /* Override spacing for quiz paragraphs */
         #quiz p {
             word-spacing: 0.05em;
             letter-spacing: 0.01em;
@@ -161,14 +180,74 @@
             width: 24px;
             height: 24px;
         }
-        .header-link {
-            color: crimson;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
+        footer {
+            padding: 10px 0;
+            font-size: 0.8em;
+            color: #aaa;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0px 5px 10px rgba(51, 51, 51, 0.4);
         }
-        .header-link:hover {
-            color: darkred;
+        footer p {
+            margin: 5px 0;
+        }
+        footer button {
+            margin-top: 10px;
+            background-color: crimson;
+            color: white;
+            margin-left: 10px;
+        }
+        #reflection, #reflection-content, #daily-prayer, #quiz {
+            padding: 20px;
+            border-radius: 8px;
+        }
+        header, footer {
+            border: 2px solid #ddd; /* Ensure the border color is visible */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .prayer-content p {
+            font-weight: 400;
+            font-size: 1.1em;
+            line-height: 1.6;
+            word-spacing: 0.03em;
+            letter-spacing: 0.005em;
+            margin-bottom: 1.2em;
+        }
+        .prayer-content {
+            background-color: #fcfcf7;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+            .logo {
+                font-size: 24px;
+                margin-left: 10px;
+            }
+            .header-link {
+                padding: 5px;
+            }
+            main {
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .company-name {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .logo {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            nav {
+                margin-left: 0;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
@@ -177,17 +256,19 @@
         <div class="progress-bar"></div>
     </div>
     <header>
-        <div class="logo">&#10014;</div>
-        <span class="company-name">The Daily Blessings</span>
+        <div class="company-name">
+            <span style="font-size: 1.2em; letter-spacing: 0.05em;">The Daily Blessings</span>
+            <div class="logo">&#10014;</div>
+        </div>
         <nav>
-            <a href="articles.html" class="header-link">Articles</a>
+            <!-- Articles link removed -->
         </nav>
     </header>
     
     <main>
-        <section id="daily-prayer">
-            <h2>Daily Prayer</h2>
-            <p>Our Father in heaven, hallowed be Your name. Your kingdom come, Your will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from evil.</p>
+        <section id="lords-prayer">
+            <h2>The Lord's Prayer</h2>
+            <p>Our Father in heaven, hallowed be your name, your kingdom come, your will be done, on earth as it is in heaven. Give us today our daily bread. And forgive us our debts, as we also have forgiven our debtors. And lead us not into temptation, but deliver us from the evil one.</p>
         </section>
         
         <section id="bible-verse">
@@ -206,9 +287,11 @@
                         <option value="hard">Hard</option>
                     </select>
                 </div>
-                <!-- reading time will be inserted here by JavaScript -->
             </div>
             <div id="reflection-content"></div>
+        </section>
+
+        <section id="daily-prayer" class="prayer-content">
         </section>
 
         <section id="quiz">
@@ -218,13 +301,11 @@
     </main>
     
     <footer>
-        <p>&copy; 2025 The Daily Blessings. All rights reserved.</p>
-        <p id="disclaimer">This content is generated by AI and may not reflect the views of The Daily Blessings.</p>
-        <button onclick="window.location.href='index.html'" style="background-color: crimson; color: white;">Home</button>
+        <p>&copy; 2025 The Daily Blessings. All rights reserved. This content is generated by AI and may not reflect the views of The Daily Blessings.</p>
+        <button onclick="window.location.href='index.html'">Home</button>
     </footer>
     
     <script>
-        // Move embedded content to fallback constant
         const fallbackContent = {
             "date": "2025-02-08",
             "bible_verse": {
@@ -327,10 +408,9 @@
             }
         };
 
-        // Ensure the daily.json file is present in the /data directory
         async function loadDailyContent() {
             try {
-                const response = await fetch('/data/daily.json');
+                const response = await fetch('data/daily.json');
                 if (!response.ok) throw new Error('Network response was not ok');
                 return await response.json();
             } catch (error) {
@@ -345,7 +425,6 @@
             const quizContent = document.getElementById('quiz-content');
             const readingLevelSelect = document.getElementById('reading-level-select');
 
-            // Load content from file or fallback
             const dailyContent = await loadDailyContent();
 
             function loadContent(level = 'medium') {
@@ -356,7 +435,6 @@
                     reflectionContent.innerHTML = dailyContent.content[level].map(paragraph => `<p>${paragraph}</p>`).join("");
                     loadQuiz(level);
                     
-                    // Merge reading time logic here:
                     const wordsPerMinute = 200;
                     const words = reflectionContent.textContent.trim().split(/\s+/).length;
                     const minutes = Math.ceil(words / wordsPerMinute);
@@ -428,9 +506,8 @@
                 loadContent(selectedLevel);
             });
 
-            loadContent('medium'); // Load content on page load with default level 'medium'
+            loadContent('medium');
 
-            // Add social sharing buttons
             function addSocialSharing() {
                 const shareContainer = document.createElement('div');
                 shareContainer.className = 'social-share';
@@ -443,7 +520,6 @@
 
             addSocialSharing();
 
-            // Optimize scroll event with requestAnimationFrame
             let ticking = false;
             window.addEventListener('scroll', () => {
                 if (!ticking) {
@@ -456,6 +532,22 @@
                     ticking = true;
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const morningPrayer = `
+                <h2>Morning Prayer</h2>
+                <p>In the name of the Father, and of the Son, and of the Holy Spirit. Amen. O Lord, bless my day and help me to do Your will. Thank You for the night’s rest and for this new morning. Fill my heart with Your love and kindness. Guide me to be obedient, patient, and joyful. Help me to love my parents, my family, my teachers, my friends, and all people. Keep me from evil and teach me to walk in Your light. Protect me throughout the day and let me always remember that You are with me. Lord Jesus Christ, have mercy on me and help me to grow in faith and goodness. Holy Mother of God, pray for me. My guardian angel, watch over me. Amen.</p>
+            `;
+            const eveningPrayer = `
+                <h2>Evening Prayer</h2>
+                <p>In the name of the Father, and of the Son, and of the Holy Spirit. Amen. O Lord, I thank You for this day and for all the blessings You have given me. Forgive me for any wrong I have done, and help me to be better tomorrow. Bless my parents, my family, my teachers, my friends, and all people. Keep us safe through the night. Send Your holy angels to guard me and protect me from all harm. Lord Jesus Christ, be with me always. Holy Mother of God, pray for me. My guardian angel, watch over me as I sleep. Amen.</p>
+            `;
+
+            const currentHour = new Date().getHours();
+            const prayerContent = currentHour < 12 ? morningPrayer : eveningPrayer;
+
+            document.getElementById('daily-prayer').innerHTML = prayerContent;
         });
     </script>
 </body>
