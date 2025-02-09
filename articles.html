@@ -3,32 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Daily Blessings - Articles</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Articles Library - The Daily Blessings">
+    
+    <!-- Resource hints -->
+    <link rel="dns-prefetch" href="https://twitter.com">
+    <link rel="dns-prefetch" href="https://facebook.com">
+    <link rel="preconnect" href="https://twitter.com">
+    <link rel="preconnect" href="https://facebook.com">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" as="font" href="/fonts/Roboto-Regular.ttf" type="font/ttf" crossorigin>
+    <link rel="preload" as="font" href="/fonts/Roboto-Bold.ttf" type="font/ttf" crossorigin>
+    
+    <!-- Cache control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>Articles Library - The Daily Blessings</title>
+    <!-- Move non-critical CSS to external file -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    
+    <!-- Inline critical CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Roboto';
+            src: url('/fonts/Roboto-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        /* Only include styles needed for initial render */
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; }
+        header { background: white; padding: 10px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: crimson; font-size: 50px; }
+        .company-name { color: crimson; }
+        .articles-library {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+        .articles-library a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: crimson;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .articles-library a:hover {
+            background-color: darkred;
+        }
+        .articles-library img {
+            width: 24px;
+            height: 24px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            border: 1px solid crimson;
+            color: crimson;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .search-container button {
+            background-color: crimson;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-container button img {
+            width: 20px;
+            height: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: white;
+            border-top: 1px solid #ddd;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer button {
+            background-color: crimson;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>The Daily Blessings</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            </ul>
-        </nav>
+        <div class="logo">&#10014;</div>
+        <span class="company-name">The Daily Blessings</span>
+        <div class="articles-library">
+            <a href="index.html" title="Home">
+                <img src="home-icon.png" alt="Home">
+            </a>
+        </div>
     </header>
     
     <main>
-        <h2>Articles</h2>
-        <div id="articles-container"></div>
+        <section id="search-articles">
+            <h2>Search Articles</h2>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search articles...">
+                <select id="levelSelect">
+                    <option value="">All Levels</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <button onclick="searchArticles()">
+                    <img src="search-icon.png" alt="Search">
+                </button>
+            </div>
+            <div id="results"></div>
+        </section>
     </main>
-
+    
     <footer>
-        <p>&copy; 2023 The Daily Blessings. All rights reserved.</p>
+        <p>&copy; 2025 The Daily Blessings. All rights reserved.</p>
+        <p id="disclaimer">This content is generated by AI and may not reflect the views of The Daily Blessings.</p>
+        <button onclick="window.location.href='index.html'">Home</button>
     </footer>
+    
+    <script>
+        async function searchArticles() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const response = await fetch('data/articles.json');
+            const articles = await response.json();
+            const results = [];
 
-    <script src="js/main.js"></script>
-    <script src="js/quizzes.js"></script>
-    <script src="js/search.js"></script>
+            for (const level in articles.content) {
+                if (!selectedLevel || selectedLevel === level) {
+                    articles.content[level].forEach(article => {
+                        if (article.title.toLowerCase().includes(query) || article.description.toLowerCase().includes(query)) {
+                            const articleDate = new Date(article.date).toLocaleDateString();
+                            results.push(`${article.title} - ${article.description} (Level: ${level}, Published: ${articleDate})`);
+                        }
+                    });
+                }
+            }
+
+            document.getElementById('results').innerHTML = results.length ? results.join('<hr>') : 'No results found';
+        }
+
+        document.getElementById('searchBar').addEventListener('input', searchArticles);
+    </script>
 </body>
 </html>
