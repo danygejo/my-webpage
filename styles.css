@@ -1,11 +1,111 @@
-@font-face {
-    font-family: 'NYT Cheltenham';
-    src: url('fonts/NYTCheltenham.woff2') format('woff2'),
-         url('fonts/NYTCheltenham.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
-    font-family: 'NYT Cheltenham', serif;
+    font-family: 'Georgia', serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+header, footer {
+    background-color: white;
+    text-align: center;
+    padding: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+    font-size: 50px;
+    color: gold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    margin-right: 20px;
+}
+.company-name {
+    color: gold;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+nav ul li {
+    margin: 0 10px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+main {
+    padding: 20px;
+    background-color: white;
+    margin: 20px auto;
+    max-width: 800px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+h2 {
+    color: #333;
+}
+#search {
+    margin-top: 20px;
+}
+footer {
+    flex-direction: column;
+}
+#disclaimer {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #fff;
+}
+#search-input {
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+#search-button {
+    background-color: gold;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+#reading-level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+#reading-level label {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #555;
+}
+#reading-level-select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
 }
