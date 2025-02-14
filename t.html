@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Speech Recognition Test</h1>
+    </header>
+
+    <main>
+        <section id="test-section">
+            <h2>Test Content</h2>
+            <p class="expected-sentence">Hello world.</p>
+            <p class="recognized-sentence" id="recognized-text"></p>
+            <div class="controls">
+                <button id="start-reading">Start Reading</button>
+                <button id="stop-reading" disabled>Stop Reading</button>
+            </div>
+            <div id="error-message" style="color: red; font-weight: bold; margin-top: 10px;"></div>
+        </section>
+    </main>
+
+    <script>
+        // Dynamically load the diff-match-patch library
+        function loadDiffLibrary(callback) {
+            const script = document.createElement("script");
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/diff-match-patch/20121119/diff_match_patch.js";
+            script.onload = callback;
+            script.onerror = function() {
+                document.getElementById("error-message").innerText = "Error: Failed to load diff-match-patch library.";
+                console.error("Error: Failed to load diff-match-patch library.");
+            };
+            document.head.appendChild(script);
+        }
+
+        let recognition;
+
+        function initializeSpeechRecognition() {
+            if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+                alert("Your browser does not support speech recognition.");
+                return;
+            }
+
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = "en-US";
+
+            recognition.onstart = function() {
+                document.getElementById("start-reading").disabled = true;
+                document.getElementById("stop-reading").disabled = false;
+                document.getElementById("error-message").innerText = "";
+            };
+
+            recognition.onresult = function(event) {
+                let transcript = Array.from(event.results).map(result => result[0].transcript).join(" ").trim().toLowerCase();
+
+                if (!transcript) {
+                    document.getElementById("error-message").innerText = "No words recognized. Try speaking clearly.";
+                    return;
+                }
+
+                document.getElementById("error-message").innerText = ""; // Clear error if words are recognized
+
+                if (typeof diff_match_patch === "undefined") {
+                    document.getElementById("error-message").innerText = "Error: diff-match-patch library not loaded.";
+                    console.error("Error: diff-match-patch library not loaded.");
+                    return;
+                }
+
+                const dmp = new diff_match_patch();
+                const expectedText = "hello world";
+                const diffs = dmp.diff_main(expectedText, transcript);
+                dmp.diff_cleanupSemantic(diffs);
+
+                let highlightedText = diffs.map(([type, text]) => {
+                    return type === -1 ? `<span class="highlight">${text}</span>` : text;
+                }).join(" ");
+
+                document.getElementById("recognized-text").innerHTML = highlightedText;
+            };
+
+            recognition.onerror = function(event) {
+                document.getElementById("error-message").innerText = `Error: ${event.error}. Please try again.`;
+                console.error("Speech Recognition Error:", event.error);
+            };
+
+            recognition.onend = function() {
+                document.getElementById("start-reading").disabled = false;
+                document.getElementById("stop-reading").disabled = true;
+            };
+
+            recognition.start();
+        }
+
+        document.getElementById("start-reading").addEventListener("click", function() {
+            loadDiffLibrary(initializeSpeechRecognition);
+        });
+
+        document.getElementById("stop-reading").addEventListener("click", function() {
+            if (recognition) {
+                recognition.stop();
+            }
+        });
+    </script>
+
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        .expected-sentence {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .recognized-sentence {
+            color: darkblue;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    </style>
+</body>
+</html>
